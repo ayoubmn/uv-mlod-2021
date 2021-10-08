@@ -3,35 +3,26 @@
 
 bool estConvexe(bool tab[],int length){
     bool state=NULL;
-    int n=0;
-    for(int i=0;i<length;i++){
-        if(i<length-1){
-
-            if(*(tab+i)==true && n==0){
-                state=true;
-                n+=1;
-                continue;
-            }
-
-            if(state==true && *(tab+i-1)==false && *(tab+i)==true){
-                state=false;
-                break;
-            }
-        }else{
-
-            if( state=false && *(tab+i)==true && *(tab)==true ){
-                return true;
-            }
-        }
-        
-        
+    int nbrEchange=0;
+    for(int i=0;i<length-1;i++){
+        if(*(tab+i)!=*(tab+i+1)){
+            nbrEchange+=1;
+            state=true;
+        } 
     }
-    return state;
+    if(*(tab+length-1)!=*(tab)){
+        nbrEchange+=1;
+    } 
+    
+    if (nbrEchange>2)
+        return false;
+    else
+        return true;
 
 }
 
 int main(void){
-    bool tab[6]={true,false,false,true,true,true};
+    bool tab[6]={true,false,true,false,true,true};
     bool convexe=estConvexe(tab,6);
     printf("%d \n",convexe);
     return 0;
