@@ -54,7 +54,7 @@ void mult_matrice_gen(int64_t matriceResultat[ROWS][COLS],int64_t matrice1[ROWS]
 
 }
 
-
+/*
 void mult_matrice_generale(int64_t ** matriceResultat,int64_t ** matrice1,int64_t  ** matrice2,int l1,int c1,int c2){
     for(int i=0;i < l1 ;i++){
         for(int j = 0; j < c2 ; j++){
@@ -76,6 +76,7 @@ void mult_matrice_generale(int64_t ** matriceResultat,int64_t ** matrice1,int64_
     //affiche_matrice(matriceResultat);
 
 }
+*/
 
 int main(void) {
     //matrices en ligne * colonne
