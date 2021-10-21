@@ -52,6 +52,21 @@ void printMatrixArray(int nombreM,Matrix* matrixArray){
     }
 
 }
+void freeMatrix(int l,int c,Matrix* matrixArray,int nbr){
+    for (int i = 0; i < l*c; i++){
+            free(&((&matrixArray[nbr])->tab[i]));        
+    }
+}
+
+void freeMatrixArray(int nombreM,Matrix* matrixArray){
+     for (int i=0;i<nombreM;i++){
+        int l= (*(matrixArray+i)).nbrLigne;
+        int c= (*(matrixArray+i)).nbrColonne;
+        freeMatrix(l,c,matrixArray,i);
+    }
+
+}
+
 
 int main(int argc, char *argv[])
 {
@@ -59,9 +74,12 @@ int main(int argc, char *argv[])
     scanf("%d",&nbr);
     Matrix*  matrixArray =calloc(nbr,sizeof(Matrix));
     readMatrixArray(nbr,matrixArray);
-
-
     printMatrixArray(nbr,matrixArray);
+    
+    /*freeMatrixArray(nbr,matrixArray);
+
+    free(matrixArray);
+*/
 	return EXIT_SUCCESS;
 }
 

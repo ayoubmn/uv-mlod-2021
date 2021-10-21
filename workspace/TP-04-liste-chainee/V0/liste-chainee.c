@@ -19,10 +19,7 @@ Liste creer(Element v){
 // ajoute l'élément v en tete de la liste l
 Liste ajoutTete(Element v, Liste l) {
 	Liste myCel=creer(v);
-
 	myCel->suiv=l;
-	l->val=v;
-	
 	return l;
 }
 
