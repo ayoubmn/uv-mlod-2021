@@ -13,14 +13,16 @@ bool estVide(Liste l) {
 Liste creer(Element v){
 	Liste myList=malloc(sizeof(Cellule));
 	myList->val=v;
+	myList->suiv=NULL;
 	return myList;
 }
 
 // ajoute l'élément v en tete de la liste l
 Liste ajoutTete(Element v, Liste l) {
 	Liste myCel=creer(v);
-	myCel->suiv=l;
-	return l;
+	myCel->suiv=l;	
+	return myCel;
+	
 }
 
 
@@ -34,12 +36,25 @@ void afficheElement(Element e) {
 // Attention la liste peut être vide !
 // version itérative
 void afficheListe_i(Liste l) {
-	TODO;
+	Liste i=l;
+	if (!estVide(i)){
+		afficheElement(i->val);
+		while (i->suiv!=NULL){
+			i=i->suiv;
+			afficheElement(i->val);
+		}
+	}
 }
 
 // version recursive
 void afficheListe_r(Liste l) {
-	TODO;
+	if (!estVide(l)){
+		afficheElement(l->val);
+		if (l->suiv!=NULL){
+			afficheListe_r(l->suiv);
+		}
+	}
+	
 }
 
 void detruireElement(Element e) {}
@@ -47,24 +62,66 @@ void detruireElement(Element e) {}
 // Détruit tous les éléments de la liste l
 // version itérative
 void detruire_i(Liste l) {
-	TODO;
+	Liste i=l;
+	if (!estVide(i)){
+		while (i->suiv!=NULL){
+			Cellule* c=i;
+			i=i->suiv;
+			c->suiv=NULL;
+			free(c);
+		}
+		l->suiv=NULL;
+		free(l);
+	}
 }
 
 // version récursive
 void detruire_r(Liste l) {
-	TODO;
+	if (!estVide(l)){
+		if (l->suiv!=NULL){
+			Liste i=l->suiv;
+			detruire_r(i);
+			l->suiv=NULL;
+			free(l);
+		}else{
+			l->suiv=NULL;
+			free(l);
+		}
+	}
 }
 
 // retourne la liste dans laquelle l'élément v a été ajouté en fin
 // version itérative
 Liste ajoutFin_i(Element v, Liste l) {
-	return TODO;
+	Liste myCel=creer(v);
+	Liste i=l;
+	if (!estVide(i)){
+		while (i->suiv!=NULL){
+			i=i->suiv;
+		}
+		i->suiv=myCel;
+	}else{
+		l=myCel;
+	}
+	return l;
 }
 
 // version recursive
 Liste ajoutFin_r(Element v, Liste l) {
-	return TODO;
+	if (!estVide(l)){
+		if (l->suiv==NULL){
+			Liste myCel=creer(v);
+			l->suiv=myCel;
+		}else{
+			ajoutFin_r(v,l->suiv);
+		}		
+	}else{
+		Liste myCel=creer(v);
+		l=myCel;
+	}
+	return l;
 }
+
 
 // compare deux elements
 bool equalsElement(Element e1, Element e2){
@@ -74,12 +131,31 @@ bool equalsElement(Element e1, Element e2){
 // Retourne un pointeur sur l'élément de la liste l contenant la valeur v ou NULL
 // version itérative
 Liste cherche_i(Element v,Liste l) {
-	return TODO;
+	Liste i=l;
+	if (!estVide(i)){
+		
+		while (i->suiv!=NULL){
+			if (i->val==v)
+				return i;
+			i=i->suiv;
+		}
+		if (i->val==v)
+			return i;
+	}
+	return NULL;
 }
 
 // version récursive
 Liste cherche_r(Element v,Liste l) {
-	return TODO;
+	if (!estVide(l)){
+		if (l->val==v){
+			return l;
+		}else{
+			cherche_r(v,l->suiv);
+		}
+	}else{
+		return NULL;
+	}
 }
 
 // Retourne la liste modifiée dans la laquelle le premier élément ayant la valeur v a été supprimé

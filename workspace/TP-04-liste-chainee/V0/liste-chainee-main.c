@@ -9,7 +9,9 @@ int main(void){
 	Liste l, p;
 
 	l = NULL;
-	printf("estVide(l) = %s\n",estVide(l)?"TRUE":"FALSE");
+	afficheListe_i(l);
+
+	printf("\nestVide(l) = %s\n",estVide(l)?"TRUE":"FALSE");
 
 	l = ajoutTete(1,l);
 	l = ajoutTete(2,l);
@@ -20,17 +22,18 @@ int main(void){
 	l = ajoutTete(2,l);
 	l = ajoutTete(4,l);
 	l = ajoutTete(1,l);
-/*
-	afficheListe_i(l);
 
-	ajoutFin_r(99,l);
-	afficheListe_i(l);
+	//afficheListe_i(l);
+
+	ajoutFin_i(99,l);
+
+	//afficheListe_i(l);
 
 	ajoutFin_r(100,l);
 	afficheListe_i(l);
 
 	p = cherche_i(200,l);
-	printf("cherche_i(200) : %s\n",estVide(p)?"pas trouve":"[ERREUR] trouve !!!");
+	printf("\ncherche_i(200) : %s\n",estVide(p)?"pas trouve":"[ERREUR] trouve !!!");
 
 	p = cherche_i(99,l);
 	if(estVide(p))
@@ -52,7 +55,7 @@ int main(void){
 		afficheElement(p->val);
 		printf("\n");
 	}
-
+/*
 	printf("retirePremier_i(1)   : ");
 	l = retirePremier_i(1,l);
 	afficheListe_r(l);
@@ -76,8 +79,10 @@ int main(void){
 	printf("retirePremier_r(99)  : ");
 	l = retirePremier_r(99,l);
 	afficheListe_r(l);
-
-	detruire_r(l);
 */
+	detruire_i(l);
+	printf("\n %d",l->val);
+	//afficheListe_i(l);
+
 	return EXIT_SUCCESS;
 }
