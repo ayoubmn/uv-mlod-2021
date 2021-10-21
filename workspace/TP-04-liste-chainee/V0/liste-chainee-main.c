@@ -55,19 +55,19 @@ int main(void){
 		afficheElement(p->val);
 		printf("\n");
 	}
-/*
-	printf("retirePremier_i(1)   : ");
+
+	printf("\nretirePremier_i(1)   : ");
 	l = retirePremier_i(1,l);
 	afficheListe_r(l);
 
-	printf("retirePremier_i(1)   : ");
+	printf("\nretirePremier_i(1)   : ");
 	l = retirePremier_i(1,l);
 	afficheListe_r(l);
 
-	printf("retirePremier_i(100) : ");
+	printf("\nretirePremier_i(100) : ");
 	l = retirePremier_i(100,l);
 	afficheListe_r(l);
-
+/*
 	printf("retirePremier_r(4)   : ");
 	l = retirePremier_r(4,l);
 	afficheListe_r(l);
@@ -81,7 +81,6 @@ int main(void){
 	afficheListe_r(l);
 */
 	detruire_i(l);
-	printf("\n %d",l->val);
 	//afficheListe_i(l);
 
 	return EXIT_SUCCESS;

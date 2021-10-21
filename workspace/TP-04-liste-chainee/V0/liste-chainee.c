@@ -36,6 +36,7 @@ void afficheElement(Element e) {
 // Attention la liste peut être vide !
 // version itérative
 void afficheListe_i(Liste l) {
+	printf("\n");
 	Liste i=l;
 	if (!estVide(i)){
 		afficheElement(i->val);
@@ -162,7 +163,27 @@ Liste cherche_r(Element v,Liste l) {
 // ne fait rien si aucun élément possède cette valeur
 // version itérative
 Liste retirePremier_i(Element v, Liste l) {
-	return TODO;
+	if (!estVide(l)){
+		if (l->val==v){
+				l=l->suiv;
+				return l;
+		}
+		Liste R=cherche_i(v,l);
+		Liste i=l;
+		Liste x=l;	
+
+		while (i->suiv!=NULL){
+			if (i->val==v){
+				x->suiv=R->suiv;
+				return l;
+			}
+			x=i;
+			i=i->suiv;
+		}
+		if (i->val==v)
+			x->suiv=R->suiv;
+	}
+	return l;
 }
 
 
