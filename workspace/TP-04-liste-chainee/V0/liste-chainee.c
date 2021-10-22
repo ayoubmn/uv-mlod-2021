@@ -74,6 +74,18 @@ void detruire_i(Liste l) {
 		l->suiv=NULL;
 		free(l);
 	}
+
+	/*
+	Liste i;
+		while (!estVide(i)){
+			i=l;
+			l=l->suiv;
+			detruireElement(i->val);
+			free(i);
+		}
+		l=NULL;
+	*/
+	
 }
 
 // version récursive
@@ -89,6 +101,14 @@ void detruire_r(Liste l) {
 			free(l);
 		}
 	}
+
+/*
+	if(!estVide(l)){
+		detruire_r(l->suiv);
+		detruireElement(l->val);
+		free(l);
+	}
+*/
 }
 
 // retourne la liste dans laquelle l'élément v a été ajouté en fin
@@ -144,6 +164,13 @@ Liste cherche_i(Element v,Liste l) {
 			return i;
 	}
 	return NULL;
+
+	/*
+	while(!estVide(l) && !equalsElement(v,l->v)){
+		l=l->suiv;
+	}
+	return l;
+	*/
 }
 
 // version récursive
@@ -157,22 +184,28 @@ Liste cherche_r(Element v,Liste l) {
 	}else{
 		return NULL;
 	}
+
+
+	/*
+	
+	*/
 }
 
 // Retourne la liste modifiée dans la laquelle le premier élément ayant la valeur v a été supprimé
 // ne fait rien si aucun élément possède cette valeur
 // version itérative
 Liste retirePremier_i(Element v, Liste l) {
+
 	if (!estVide(l)){
+		Liste i=l;
+		//first element
 		if (l->val==v){
 				l=l->suiv;
 				return l;
 		}
 		Liste R=cherche_i(v,l);
-		Liste i=l;
 		Liste x=l;	
-
-		while (i->suiv!=NULL){
+		while (!estVide(i->suiv)){
 			if (i->val==v){
 				x->suiv=R->suiv;
 				return l;
@@ -182,14 +215,31 @@ Liste retirePremier_i(Element v, Liste l) {
 		}
 		if (i->val==v)
 			x->suiv=R->suiv;
+		free(R);
 	}
 	return l;
+
 }
 
 
 // version recursive
 Liste retirePremier_r(Element v, Liste l) {
-	return TODO;
+	if (!estVide(l)){
+		if (l->val==v){
+			l=l->suiv;
+			return l;
+		}
+		if ((l->suiv)->val==v){
+			Liste R=cherche_i(v,l);
+			l->suiv=R->suiv;
+			free(R);
+		}else{
+			retirePremier_r(v,l->suiv);
+		}
+		return l;
+	}
+	return NULL;
+
 }
 
 
