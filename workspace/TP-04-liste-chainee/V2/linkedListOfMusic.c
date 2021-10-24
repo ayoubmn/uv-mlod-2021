@@ -12,7 +12,9 @@ void afficheElement(Element e) {
     printf("%s,%s,%s,%s,%s,%s,%s",music->name,music->Artist,music->Album,music->Genre,music->Disc_Number,music->Track_Number,music->Year);
 }
 
-void detruireElement(Element e) {}
+void detruireElement(Element e) {
+    free(e);
+}
 
 // compare deux elements
 bool equalsElement(Element e1, Element e2){
@@ -36,6 +38,23 @@ Liste readMusics(char* line,Liste l){
     music->Year=strsep(&line, ",");
     return ajoutTete(music,l);
     //printf("%s\n",((Music*)l->val)->name);
-
 }
 
+Liste trierParDate(Liste l){
+    Liste* temp;
+
+    Liste z=l;
+    while(z != NULL){
+        Liste p=z; 
+        while (p->suiv !=NULL){
+            if(atoi(((Music*)p->val)->Year) > atoi(((Music*)p->suiv->val)->Year)){
+                temp = (p->val);
+                (p->val) = (p->suiv->val);
+                (p->suiv->val) = temp;
+            }
+            p = p->suiv;
+        }
+        z = z->suiv;
+    }
+    return l;
+}

@@ -15,3 +15,4 @@ typedef struct music Music;
 
 
 Liste readMusics(char* line,Liste l);
+Liste trierParDate(Liste l);
