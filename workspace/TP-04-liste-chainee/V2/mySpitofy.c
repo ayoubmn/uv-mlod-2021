@@ -18,26 +18,27 @@ int main(void){
     char musicsFile[] = "music.csv";
     FILE* f;
     f=fopen(musicsFile,"r");
-    char buffer[1024];
+    char buffer[512];
     Liste musicL;
     musicL=NULL;
-    char* champs=fgets(buffer, 1024, f);
-    printf("%s",champs);
-    while (fgets(buffer, 1024, f)){
-        char* line = strdup(buffer);
-        musicL=readMusics(line,musicL);
+    printf("%s",fgets(buffer, 512, f));
+    //free(champs);
+
+    while (fgets(buffer, 512, f)){
+        musicL=readMusics(buffer,musicL);
     }
+
     //afficheListe_i(musicL);
     //afficheEnvers_r(musicL);
 
     //tri
+
+    /*
     musicL=trierParDate(musicL);
     afficheEnvers_r(musicL);
-
+    */
 
     //free
 	detruire_r(musicL);
-
-
 
 }

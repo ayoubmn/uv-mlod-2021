@@ -13,6 +13,8 @@ void afficheElement(Element e) {
 }
 
 void detruireElement(Element e) {
+    Music* music=(Music *)e;
+    free(music->name);
     free(e);
 }
 
@@ -27,7 +29,8 @@ bool equalsElement(Element e1, Element e2){
 // Functions implementation
 // ============
 
-Liste readMusics(char* line,Liste l){
+Liste readMusics(char* buffer,Liste l){
+    char* line = strdup(buffer);
     Music *music=malloc(sizeof(Music));
     music->name=strsep(&line, ",");
     music->Artist=strsep(&line, ",");
@@ -36,8 +39,9 @@ Liste readMusics(char* line,Liste l){
     music->Disc_Number=strsep(&line, ",");
     music->Track_Number=strsep(&line, ",");
     music->Year=strsep(&line, ",");
+    //printf("%s\n",music->name);
+    free(line);
     return ajoutTete(music,l);
-    //printf("%s\n",((Music*)l->val)->name);
 }
 
 Liste trierParDate(Liste l){
