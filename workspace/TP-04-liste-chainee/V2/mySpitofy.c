@@ -22,23 +22,23 @@ int main(void){
     Liste musicL;
     musicL=NULL;
     printf("%s",fgets(buffer, 512, f));
-    //free(champs);
 
     while (fgets(buffer, 512, f)){
         musicL=readMusics(buffer,musicL);
     }
 
-    //afficheListe_i(musicL);
-    //afficheEnvers_r(musicL);
+    //reafficher la liste
+    afficheEnvers_r(musicL);
 
     //tri
-
     /*
     musicL=trierParDate(musicL);
-    afficheEnvers_r(musicL);
+    afficheListe_i(musicL);
     */
 
     //free
 	detruire_r(musicL);
+
+    //total heap usage: 8,106 allocs, 8,105 frees, 389,301 bytes allocated
 
 }
