@@ -151,14 +151,27 @@ void afficheGDR_r(ArbreBinaire a){
 // retourne le noeud dont la valeur est minimum dans l'arbre
 // Suppose que a est un arbre binaire de recherche sans doublons
 ArbreBinaire min(ArbreBinaire a){
+	ArbreBinaire min;
+	while (!estVide(a)){
+		ArbreBinaire p=a;
+		a=a->filsGauche;
+		if(estVide(a))
+			return p;
+	}
 	return NULL;
 }
 
 // retourne le noeud dont la valeur est maximum dans l'arbre
 // Suppose que a est un arbre binaire de recherche sans doublons
 ArbreBinaire max(ArbreBinaire a){
-	return NULL;
-}
+	ArbreBinaire min;
+	while (!estVide(a)){
+		ArbreBinaire p=a;
+		a=a->filsDroit;
+		if(estVide(a))
+			return p;
+	}
+	return NULL;}
 
 
 // retourne l'arbre dont la valeur de la racine est elem et NULL si elem n'existe dans a 
@@ -176,13 +189,30 @@ ArbreBinaire recherche_r(ArbreBinaire a, Element elem){
 
 
 // suppime x de a
-ArbreBinaire supprimer_r(ArbreBinaire a,Element x)
-{
+ArbreBinaire supprimer_r(ArbreBinaire a,Element x){
+/*	
+if (estVide(a) || (x=a->val))
+		return a;
 
-	return NULL;
+
+	if (x=a->filsDroit->val){
+	}
+		
+	else{
+		if (x<a->val)
+			return supprimer_r(a->filsGauche,x);
+		else
+			return supprimer_r(a->filsDroit,x);
+	}
+*/
 }
 
 void detruire_r(ArbreBinaire a){
-
+	if( !estVide(a) ){
+		detruire_r(a->filsDroit);
+		detruire_r(a->filsGauche);
+		//free(a->val);
+		free(a);
+	}
 }
 

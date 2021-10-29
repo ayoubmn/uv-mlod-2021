@@ -39,6 +39,9 @@ int main(void){
 	a = insere_r(a,3);
 	afficheGRD_r(a);printf("\n");
 	printf("nombreDeNoeud(a)= %i\n",nombreDeNoeud(a));
+	printf("min %i\n",min(a)->val);
+	printf("max %i\n",max(a)->val);
+
 	return 0;
 
 // 	a = supprimer_r(a,6);
