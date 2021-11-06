@@ -105,19 +105,24 @@ int hauteur(ArbreBinaire a){
 
 // retourne le pere de elem dans l'arbre a ou NULL s'il n'existe pas
 ArbreBinaire pere(ArbreBinaire a, Element elem){
-	if (estVide(a)){
+	if (estVide(a))
+		return NULL;
+	
+	if (a->val==elem){
 		return NULL;
 	}
+	
+	ArbreBinaire p;
 	while (!estVide(a)){
-		ArbreBinaire p=a;
+		if (elem==a->val)
+			return p;
+
+		p=a;
 		if(elem<a->val){
 			a=a->filsGauche;
 		}else{
 			a=a->filsDroit;
-		}
-		if (elem==a->val)
-			return a;
-		
+		}		
 	}
 	return NULL;
 }
@@ -190,21 +195,90 @@ ArbreBinaire recherche_r(ArbreBinaire a, Element elem){
 
 // suppime x de a
 ArbreBinaire supprimer_r(ArbreBinaire a,Element x){
-/*	
-if (estVide(a) || (x=a->val))
-		return a;
-
-
-	if (x=a->filsDroit->val){
+	bool g=false;
+	bool d=false;
+	if (!estVide(a->filsDroit)){
+		if (x==a->filsDroit->val)
+			d=true;
 	}
-		
+	if (!estVide(a->filsGauche)){
+		if (x==a->filsGauche->val)
+			g=true;
+	}
+
+
+	if (d || g ){
+		printf("val %d\n",a->filsGauche->val);
+
+		ArbreBinaire p = a;
+		a= d ? a->filsDroit : a->filsGauche;
+		printf("a= %d \n",a->val);
+		printf("x= %d \n",x);
+		printf("p= %d \n",p->val);
+
+		if(estVide(p)){
+			free(a);
+			return NULL; 
+		}
+
+		if (x>p->val ){
+			if (hauteur(a)==1){
+				printf("hauteur= %d \n",hauteur(a));
+				p->filsDroit=NULL;
+
+			}else{
+				ArbreBinaire m=min(a->filsDroit);
+				ArbreBinaire del=a;
+				p->filsDroit=m;
+				m->filsGauche= !estVide(a->filsGauche)? a->filsGauche:NULL;
+				free(del);
+				}
+		}
+		else if (x<p->val ){
+			if (hauteur(a)==1){
+				printf("hauteur= %d \n",hauteur(a));
+				p->filsGauche=NULL;
+
+			}else{
+				ArbreBinaire m=max(a->filsGauche);
+				ArbreBinaire del=a;
+				p->filsGauche=m;
+				m->filsDroit= !estVide(a->filsDroit)? a->filsDroit:NULL;
+
+				free(del);
+			}
+
+			//p->filsGauche->filsGauche=m->filsGauche;
+			//pere(a,m->val)->filsDroit=NULL;
+			//free(m);
+		}		
+	
+	
+	}else if (x < a->val&& !estVide(a->filsGauche)){
+		supprimer_r(a->filsGauche,x);
+	}else if (x > a->val && !estVide(a->filsDroit)){
+		supprimer_r(a->filsDroit,x);
+	}
 	else{
-		if (x<a->val)
-			return supprimer_r(a->filsGauche,x);
-		else
-			return supprimer_r(a->filsDroit,x);
+		if (!estVide(a->filsDroit)){
+			ArbreBinaire m=min(a->filsDroit);
+			ArbreBinaire p=pere(a,m->val);
+			a->val=m->val;
+			p->filsGauche=NULL;
+			free(m);
+		}
+		else if (!estVide(a->filsGauche)){
+			ArbreBinaire m=max(a->filsGauche);
+			ArbreBinaire p=pere(a,m->val);
+			a->val=m->val;
+			p->filsDroit=NULL;
+			free(m);
+		}
 	}
-*/
+	
+	printf(" test %d\n",a->val);
+	return a;
+
 }
 
 void detruire_r(ArbreBinaire a){
@@ -215,4 +289,5 @@ void detruire_r(ArbreBinaire a){
 		free(a);
 	}
 }
+
 
